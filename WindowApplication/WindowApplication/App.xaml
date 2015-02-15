@@ -18,13 +18,43 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="controls:FrameContainer">
-                            <Grid x:Name="MainGrid" Background="#FFF6F6F6">
-
+                            <Grid x:Name="MainGrid">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Border x:Name="MenuButton"
+                                            Margin="0,0,27,0"
+                                            Width="60" Background="Red">
+                                        <Image />
+                                    </Border>
+                                    
+                                    <ContentControl x:Name="TopBar" Height="87" Grid.Column="1"
+                                                    Content="{TemplateBinding TopBarPanel}"
+                                                    HorizontalContentAlignment="Stretch" 
+                                                    VerticalContentAlignment="Stretch" />
+                                </Grid>
+                                
                                 <ContentControl Content="{TemplateBinding Content}"
                                                 x:Name="FirstContentPresenter"
+                                                Grid.Row="1"
                                                 VerticalContentAlignment="Stretch"
                                                 HorizontalContentAlignment="Stretch"/>
 
+                                <Border x:Name="MenuShadow" 
+                                        Background="#66000000">
+                                    <ContentControl x:Name="Menu" Grid.Row="1" 
+                                                    Content="{TemplateBinding MenuPanel}"
+                                                    VerticalContentAlignment="Stretch" 
+                                                    HorizontalAlignment="Left"/>
+                                </Border>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
