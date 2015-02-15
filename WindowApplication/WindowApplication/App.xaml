@@ -22,7 +22,6 @@
 
                                 <ContentControl Content="{TemplateBinding Content}"
                                                 x:Name="FirstContentPresenter"
-                                                Grid.Row="1"
                                                 VerticalContentAlignment="Stretch"
                                                 HorizontalContentAlignment="Stretch"/>
 
