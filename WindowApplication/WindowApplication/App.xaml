@@ -3,7 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WindowApplication"
-    xmlns:controls="using:WindowApplication.Controls">
+    xmlns:controls="using:WindowApplication.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d">
     
     <Application.Resources>
         <ResourceDictionary>
@@ -15,52 +18,92 @@
                  You can freely edit this template to tune your global experience        
             -->
             <Style TargetType="controls:FrameContainer">
+                <Setter Property="UpdateMenuOnPageNavigated" Value="True" />
+                <Setter Property="UpdateTopBarOnPageNavigated" Value="True" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="controls:FrameContainer">
                             <Grid x:Name="MainGrid">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
+                                <Grid.Resources>
+                                    <Storyboard x:Name="OpenMenu">
+                                        <DoubleAnimation Duration="0:0:0.3" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="Menu" d:IsOptimized="True">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Duration="0:0:0.3" To="300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationGrid" d:IsOptimized="True">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
                                     
-                                    <Border x:Name="MenuButton"
-                                            Margin="0,0,27,0"
-                                            Width="60" Background="Red">
-                                        <Image />
-                                    </Border>
-                                    
-                                    <ContentControl x:Name="TopBar" Height="87" Grid.Column="1"
+                                    <Storyboard x:Name="CloseMenu">
+                                        <DoubleAnimation Duration="0:0:0.2" To="-300" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="Menu" d:IsOptimized="True">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ApplicationGrid" d:IsOptimized="True">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </Grid.Resources>
+
+                                <Grid x:Name="ApplicationGrid">
+                                    <Grid.RenderTransform>
+                                        <CompositeTransform TranslateX="0"/>
+                                    </Grid.RenderTransform>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                        
+                                    <Grid x:Name="TopBarGrid" 
+                                          Background="#FF5D5D5D">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border x:Name="MenuButton"
+                                                Margin="0,27,0,0"
+                                                Width="60">
+                                            <Image Source="Assets/Menu/MenuIcon.png" Margin="15" />
+                                        </Border>
+
+                                        <ContentControl x:Name="TopBar" Height="87" Grid.Column="1"
                                                     Content="{TemplateBinding TopBarPanel}"
                                                     HorizontalContentAlignment="Stretch" 
-                                                    VerticalContentAlignment="Stretch" />
-                                </Grid>
-                                
-                                <ContentControl Content="{TemplateBinding Content}"
-                                                x:Name="FirstContentPresenter"
-                                                Grid.Row="1"
-                                                VerticalContentAlignment="Stretch"
-                                                HorizontalContentAlignment="Stretch"/>
+                                                    VerticalContentAlignment="Stretch"/>
+                                    </Grid>
 
-                                <Border x:Name="MenuShadow" 
-                                        Background="#66000000">
-                                    <ContentControl x:Name="Menu" Grid.Row="1" 
-                                                    Content="{TemplateBinding MenuPanel}"
-                                                    VerticalContentAlignment="Stretch" 
-                                                    HorizontalAlignment="Left"/>
-                                </Border>
+                                    <ContentControl Content="{TemplateBinding Content}"
+                                                    x:Name="FirstContentPresenter"
+                                                    Grid.Row="1"
+                                                    VerticalContentAlignment="Stretch"
+                                                    HorizontalContentAlignment="Stretch"/>
+                                </Grid>
+
+                                <ContentControl x:Name="Menu"
+                                                Width="300"
+                                                Content="{TemplateBinding MenuPanel}"
+                                                VerticalContentAlignment="Stretch"
+                                                HorizontalContentAlignment="Stretch" 
+                                                HorizontalAlignment="Left">
+                                    <ContentControl.RenderTransform>
+                                        <CompositeTransform TranslateX="-300"/>
+                                    </ContentControl.RenderTransform>
+                                </ContentControl>
+
+
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
-            
             
         </ResourceDictionary>
     </Application.Resources>

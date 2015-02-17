@@ -14,6 +14,24 @@ namespace WindowApplication.Controls
 {
     public class ViewPage : Page
     {
+        public UIElement MenuContent
+        {
+            get { return (UIElement)GetValue(MenuContentProperty); }
+            set { SetValue(MenuContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty MenuContentProperty =
+            DependencyProperty.Register("MenuContent", typeof(UIElement), typeof(ViewPage), new PropertyMetadata(null));
+
+        public UIElement TopBarContent
+        {
+            get { return (UIElement)GetValue(TopBarContentProperty); }
+            set { SetValue(TopBarContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty TopBarContentProperty =
+            DependencyProperty.Register("TopBarContent", typeof(UIElement), typeof(ViewPage), new PropertyMetadata(null));
+
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 

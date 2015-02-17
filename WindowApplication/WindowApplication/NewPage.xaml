@@ -1,5 +1,5 @@
 ﻿<controls:ViewPage
-    x:Class="WindowApplication.MainPage"
+    x:Class="WindowApplication.NewPage"
     xmlns:controls="using:WindowApplication.Controls"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,15 +7,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <controls:ViewPage.MenuContent>
-        <Border Background="Azure" />
+        <Border Background="Pink" />
     </controls:ViewPage.MenuContent>
     <controls:ViewPage.TopBarContent>
-        <Border Background="Red"/>
+        <Border Background="Orange"/>
     </controls:ViewPage.TopBarContent>
-    
+
     <Grid Background="White">
-        <Button Click="Button_Click" Content="fafa" RequestedTheme="Light" />
     </Grid>
 </controls:ViewPage>

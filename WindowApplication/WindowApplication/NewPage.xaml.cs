@@ -14,21 +14,19 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+// Il modello di elemento per la pagina vuota è documentato all'indirizzo http://go.microsoft.com/fwlink/?LinkID=390556
+
 namespace WindowApplication
 {
-    public sealed partial class MainPage : ViewPage
+    /// <summary>
+    /// Pagina vuota che può essere utilizzata autonomamente oppure esplorata all'interno di un frame.
+    /// </summary>
+    public sealed partial class NewPage : ViewPage
     {
-        public MainPage()
-            : base()
+        public NewPage() : base()
         {
             this.InitializeComponent();
-
-            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(NewPage));
-        }
     }
 }
