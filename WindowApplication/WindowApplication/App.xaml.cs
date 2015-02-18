@@ -110,6 +110,7 @@ namespace WindowApplication
             var rootFrame = sender as Frame;
             rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
+            
         }
 
         private void OnSuspending(object sender, SuspendingEventArgs e)
