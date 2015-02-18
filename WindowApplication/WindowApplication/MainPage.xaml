@@ -9,13 +9,69 @@
     mc:Ignorable="d">
     
     <controls:ViewPage.MenuContent>
-        <Border Background="Azure" />
+        <Border Background="#FF444444">
+            <StackPanel Margin="20,75,20,15">
+                <TextBlock Text="Sample menu" Foreground="White" FontSize="20" Margin="0,5" />
+                <TextBlock Text="You can put free content" Foreground="White" FontSize="20" Margin="0,5"  />
+                <TextBlock Text="and also remove this panels" Foreground="White" FontSize="20" Margin="0,5"  />
+            </StackPanel>
+        </Border>
     </controls:ViewPage.MenuContent>
     <controls:ViewPage.TopBarContent>
-        <Border Background="Red"/>
+        <Border>
+            <TextBlock Text="HEY, I'm the top bar" 
+                       FontSize="22" 
+                       Foreground="White" 
+                       VerticalAlignment="Center" />
+        </Border>
     </controls:ViewPage.TopBarContent>
     
-    <Grid Background="White">
-        <Button Click="Button_Click" Content="fafa" RequestedTheme="Light" />
+    <Grid>
+        <ScrollViewer HorizontalAlignment="Center" 
+                      VerticalAlignment="Center"
+                      Margin="20,0">
+            <StackPanel>
+                <RichTextBlock HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           Foreground="Black"
+                           TextWrapping="Wrap"
+                           FontSize="20" 
+                           TextAlignment="Center">
+                    <RichTextBlock.Blocks>
+                        <Paragraph>
+                            <Run Foreground="Black">
+                                Hi, and welcome to this application template with an amazing
+                            GLOBAL menu and top bar. I'm the page, use me normally.
+                            </Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Foreground="Red" FontSize="24">
+                                TRY SWIPE RIGHT FROM LEFT PAGE BORDER :)
+                            </Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run>
+                                You can put menu in MenuContent object and top bar in TopBarContent
+                            </Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run>
+                                For more informations read documentation.
+                            </Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run>
+                                tap above to try navigate betwen pages
+                            </Run>
+                        </Paragraph>
+                    </RichTextBlock.Blocks>
+                </RichTextBlock>
+                <Button Click="Button_Click" 
+                    Content="Let's navigate!" 
+                    RequestedTheme="Light" 
+                    HorizontalAlignment="Center"
+                    Margin="10"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </controls:ViewPage>

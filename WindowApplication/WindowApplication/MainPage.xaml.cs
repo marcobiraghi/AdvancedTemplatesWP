@@ -19,11 +19,11 @@ namespace WindowApplication
     public sealed partial class MainPage : ViewPage
     {
         public MainPage()
-            : base()
+            : base() // ALWAYS REMEMBER TO CALL BASE CONSTRUCTOR
         {
             this.InitializeComponent();
 
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.NavigationCacheMode = NavigationCacheMode.Required; //OPTIONAL
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

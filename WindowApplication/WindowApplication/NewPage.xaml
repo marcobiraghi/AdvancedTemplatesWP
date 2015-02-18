@@ -8,13 +8,51 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <controls:ViewPage.MenuContent>
-        <Border Background="Pink" />
-    </controls:ViewPage.MenuContent>
-    <controls:ViewPage.TopBarContent>
-        <Border Background="Orange"/>
-    </controls:ViewPage.TopBarContent>
-
-    <Grid Background="White">
+    <Grid>
+        <ScrollViewer Margin="20,0">
+            <RichTextBlock HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Foreground="Black"
+                       TextWrapping="Wrap"
+                       FontSize="20" TextAlignment="Center">
+                <RichTextBlock.Blocks>
+                    <Paragraph>
+                        <Run>
+                            Hi, I'm page 2. Here you can place here content normally, 
+                        top bar and menu will be rendered at runtime.
+                        </Run>
+                        <LineBreak />
+                        <LineBreak />
+                        <Run Foreground="Red" FontSize="24">
+                            Isn't this amazing? :)
+                        </Run>
+                        <LineBreak />
+                        <LineBreak />
+                        <Run>
+                            If you set to true App.AppContainer.UpdateTopBarOnPageNavigated 
+                        and/or App.AppContainer.UpdateMenuOnPageNavigated you must put in 
+                        this and all others page menu and/or top bar content or they 
+                        will be null.
+                        </Run>
+                        <LineBreak />
+                        <LineBreak />
+                        <Run>
+                            You can lock menu setting true App.AppContainer.LockMenu
+                        </Run>
+                        <LineBreak />
+                        <LineBreak />
+                        <Run Foreground="Red">
+                            Important:
+                        </Run>
+                        <Run>
+                            every page must be of type
+                        </Run>
+                        <Run FontWeight="Bold">
+                            controls:ViewPage
+                        </Run>
+                    </Paragraph>
+                </RichTextBlock.Blocks>
+            </RichTextBlock>
+        </ScrollViewer>
     </Grid>
 </controls:ViewPage>

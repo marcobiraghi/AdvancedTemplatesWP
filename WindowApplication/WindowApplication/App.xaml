@@ -18,12 +18,12 @@
                  You can freely edit this template to tune your global experience        
             -->
             <Style TargetType="controls:FrameContainer">
-                <Setter Property="UpdateMenuOnPageNavigated" Value="True" />
-                <Setter Property="UpdateTopBarOnPageNavigated" Value="True" />
+                <Setter Property="UpdateMenuOnPageNavigated" Value="False" />
+                <Setter Property="UpdateTopBarOnPageNavigated" Value="False" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="controls:FrameContainer">
-                            <Grid x:Name="MainGrid">
+                            <Grid x:Name="MainGrid" Background="#FFE3E3E3">
                                 <Grid.Resources>
                                     <Storyboard x:Name="OpenMenu">
                                         <DoubleAnimation Duration="0:0:0.3" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="Menu" d:IsOptimized="True">
@@ -62,22 +62,26 @@
                                     </Grid.RowDefinitions>
                                         
                                     <Grid x:Name="TopBarGrid" 
-                                          Background="#FF5D5D5D">
+                                          Background="#FF5D5D5D"
+                                          Height="85">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
 
                                         <Border x:Name="MenuButton"
-                                                Margin="0,27,0,0"
-                                                Width="60">
+                                                Height="60"
+                                                Width="60"
+                                                VerticalAlignment="Bottom">
                                             <Image Source="Assets/Menu/MenuIcon.png" Margin="15" />
                                         </Border>
 
-                                        <ContentControl x:Name="TopBar" Height="87" Grid.Column="1"
-                                                    Content="{TemplateBinding TopBarPanel}"
-                                                    HorizontalContentAlignment="Stretch" 
-                                                    VerticalContentAlignment="Stretch"/>
+                                        <ContentControl x:Name="TopBar" Grid.Column="1"
+                                                        Content="{TemplateBinding TopBarPanel}"
+                                                        Height="60"
+                                                        VerticalAlignment="Bottom"
+                                                        HorizontalContentAlignment="Stretch" 
+                                                        VerticalContentAlignment="Stretch"/>
                                     </Grid>
 
                                     <ContentControl Content="{TemplateBinding Content}"

@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
+using Windows.Graphics.Display;
+using Windows.UI;
 using Windows.UI.Input;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -23,7 +26,6 @@ namespace WindowApplication.Controls
 
         public static readonly DependencyProperty TopBarPanelProperty =
             DependencyProperty.Register("TopBarPanel", typeof(UIElement), typeof(FrameContainer), new PropertyMetadata(null));
-
 
         public UIElement MenuPanel
         {
@@ -54,10 +56,14 @@ namespace WindowApplication.Controls
         public static readonly DependencyProperty UpdateTopBarOnPageNavigatedProperty =
             DependencyProperty.Register("UpdateTopBarOnPageNavigated", typeof(bool), typeof(FrameContainer), new PropertyMetadata(false));
 
+        public bool LockMenu { get; set; }
+
+
+
         private ContentControl firstContentPresenter, topBar, menu;
         private Border menuButton;
         private Frame appFrame;
-        private Grid mainGrid;
+        private Grid mainGrid, topBarGrid;
 
         protected override void OnApplyTemplate()
         {
@@ -67,10 +73,11 @@ namespace WindowApplication.Controls
             if (firstContentPresenter != null)
                 appFrame = firstContentPresenter.Content as Frame;
 
-            loadMenuAndBar();
+            loadMenuAndBar(true);
             appFrame.Navigated += (sender, e) => loadMenuAndBar();
 
             topBar = GetTemplateChild("TopBar") as ContentControl;
+            topBarGrid = GetTemplateChild("TopBarGrid") as Grid;
             menu = GetTemplateChild("Menu") as ContentControl;
 
             menuButton = GetTemplateChild("MenuButton") as Border;
@@ -84,14 +91,50 @@ namespace WindowApplication.Controls
 
             mainGrid = GetTemplateChild("MainGrid") as Grid;
 
+            var view = ApplicationView.GetForCurrentView();
+            if (view != null && view.DesiredBoundsMode != ApplicationViewBoundsMode.UseCoreWindow)
+                view.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+
+            var statusBar = StatusBar.GetForCurrentView();
+            if (statusBar != null)
+            {
+                statusBar.BackgroundColor = new Color() { R = 0, G = 0, B = 0 };
+                statusBar.ForegroundColor = new Color() { R = 255, G = 255, B = 255 };
+                statusBar.BackgroundOpacity = 0;
+            }
+
             gestureHandler();
+
+            DisplayInformation.GetForCurrentView().OrientationChanged += FrameContainer_OrientationChanged;
+        }
+
+        async void FrameContainer_OrientationChanged(DisplayInformation sender, object args)
+        {
+            if (sender.CurrentOrientation == DisplayOrientations.Portrait)
+            {
+                var statusBar = StatusBar.GetForCurrentView();
+                if (statusBar != null)
+                {
+                    await statusBar.ShowAsync();
+                    topBarGrid.Height = topBarGrid.ActualHeight + 25;
+                }
+            }
+            else
+            {
+                var statusBar = StatusBar.GetForCurrentView();
+                if (statusBar != null)
+                {
+                    await statusBar.HideAsync();
+                    topBarGrid.Height = topBarGrid.ActualHeight - 25;
+                }
+            }
         }
 
         bool isMenuOpened = false;
         
         public void OpenMenu()
         {
-            if (mainGrid == null)
+            if (mainGrid == null || LockMenu)
                 return;
 
             var storyboard = mainGrid.Resources["OpenMenu"] as Storyboard;
@@ -115,11 +158,11 @@ namespace WindowApplication.Controls
             isMenuOpened = false;
         }
 
-        private void loadMenuAndBar()
+        private void loadMenuAndBar(bool force = false)
         {
-            if (UpdateMenuOnPageNavigated)
+            if (UpdateMenuOnPageNavigated || force)
                 MenuPanel = (((Frame)firstContentPresenter.Content).Content as ViewPage).MenuContent;
-            if (UpdateTopBarOnPageNavigated)
+            if (UpdateTopBarOnPageNavigated || force)
                 TopBarPanel = (((Frame)firstContentPresenter.Content).Content as ViewPage).TopBarContent;
 
         }
