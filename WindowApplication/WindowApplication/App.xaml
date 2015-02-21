@@ -69,6 +69,7 @@
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
 
+                                        <!-- Change this horrible menu with a proper button -->
                                         <Border x:Name="MenuButton"
                                                 Height="60"
                                                 Width="60"
