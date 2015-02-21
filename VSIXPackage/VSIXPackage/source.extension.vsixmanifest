@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="VSIXPackage..e4ae6dca-3034-4d9f-bda9-60ae6bed9ac7" Version="1.0" Language="en-US" Publisher="Marco Biraghi" />
+    <DisplayName>Slide Menu Template</DisplayName>
+    <Description xml:space="preserve">This is a useful Windows Phone 8.1 template with built-in global side slide menu and tob</Description>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[14.0]" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+  </Dependencies>
+</PackageManifest>
