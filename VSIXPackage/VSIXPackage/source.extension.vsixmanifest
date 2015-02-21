@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="VSIXPackage..e4ae6dca-3034-4d9f-bda9-60ae6bed9ac7" Version="1.2" Language="en-US" Publisher="Marco Biraghi" />
+    <Identity Id="VSIXPackage..e4ae6dca-3034-4d9f-bda9-60ae6bed9ac7" Version="1.3" Language="en-US" Publisher="Marco Biraghi" />
     <DisplayName>Windows Phone Template Pack</DisplayName>
     <Description xml:space="preserve">This is a useful Windows Phone 8.1 template with global side slide menu and topbar built-in </Description>
     <MoreInfo>https://github.com/marcobiraghi/WindowedApp-WP-template</MoreInfo>
@@ -17,7 +17,7 @@
     <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
   </Dependencies>
   <Assets>
-    <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" d:TargetPath="ProjectTemplates\Menu and Topbar app (Windows Phone 8.1).zip" />
-    <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplates" d:TargetPath="ProjectTemplates\Topbar app (Windows Phone 8.1).zip" />
+    <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplateB" d:TargetPath="ProjectTemplateB\Menu and Topbar app (Windows Phone 8.1).zip" />
+    <Asset Type="Microsoft.VisualStudio.ProjectTemplate" d:Source="File" Path="ProjectTemplateA" d:TargetPath="ProjectTemplateA\Topbar app (Windows Phone 8.1).zip" />
   </Assets>
 </PackageManifest>
