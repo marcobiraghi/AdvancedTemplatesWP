@@ -16,12 +16,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace WindowApplication
 {
-    public sealed partial class NewPage : ViewPage
+    public sealed partial class BlankViewPage : ViewPage
     {
-        public NewPage() : base()
+        public BlankViewPage()
+            : base()
         {
             this.InitializeComponent();
-        }
 
+            this.NavigationCacheMode = NavigationCacheMode.Required; //OPTIONAL
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace WindowApplication
     public sealed partial class MainPage : ViewPage
     {
         public MainPage()
-            : base() // ALWAYS REMEMBER TO CALL BASE CONSTRUCTOR
+            : base()
         {
             this.InitializeComponent();
 
