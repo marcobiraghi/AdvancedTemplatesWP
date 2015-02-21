@@ -19,7 +19,7 @@ This is a powerful pack with 2 ready to use Windows Phone 8.1 applications templ
 C&P menu and top bar in each page is a waste of time and performance. With these template the elements are defined *one time* in a root frame container. The application (Frame) is *inside* this container. You can edit container for customize the global experience, or "develop normally" to build pages.
 
 #####Ready to use
-Download VSIX from Visual Studio Gallery to start develop NOW. Available for Visual Studio 2013 and 14.
+[Download VSIX from Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/ba19ab63-f0b7-4aac-b611-261b2d053340) to start develop NOW. Available for Visual Studio 2013 and 14.
 
 ###Version
 2.1
@@ -32,7 +32,7 @@ This repository contains templates' original projects, VSIX project and some com
 [Download and install VSIX from Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/ba19ab63-f0b7-4aac-b611-261b2d053340). Open Visual Studio and create new project. Go to Visual C# project template group and choose "Menu and topbar application (Windows Phone 8.1)" or "Topbar application (Windows Phone 8.1). Rename project name and click ok. Template is self-explicative, 
 
 ###Learn about
-If you want to understand how this template works, read this article on my website. It explains everythings about this solution and some ways to extend these templates or create newer ones.
+If you want to understand how this template works, [read this article on my website](http://developingwindows.com/universal-app-share-elements-between-pages/). It explains everythings about this solution and some ways to extend these templates or create newer ones.
 
 ###License
 
