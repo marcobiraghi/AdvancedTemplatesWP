@@ -21,7 +21,7 @@ C&P menu and top bar in each page is a waste of time and performance. With these
 #####Ready to use
 Download VSIX from Visual Studio Gallery to start develop NOW. Available for Visual Studio 2013 and 14.
 
-####Version
+###Version
 2.1
 
 ###Repository
