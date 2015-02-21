@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using WindowApplication.Controls;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -16,33 +17,22 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
-// Il modello di applicazione vuota è documentato all'indirizzo http://go.microsoft.com/fwlink/?LinkId=391641
 
 namespace WindowApplication
 {
-    /// <summary>
-    /// Fornisci un comportamento specifico dell'applicazione in supplemento alla classe Application predefinita.
-    /// </summary>
     public sealed partial class App : Application
     {
+        public static FrameContainer AppContainer { get; set; }
+        public static Frame RootFrame { get; set; }
+
         private TransitionCollection transitions;
 
-        /// <summary>
-        /// Inizializza l'oggetto Application singleton. Si tratta della prima riga del codice creato
-        /// eseguita e, come tale, corrisponde all'equivalente logico di main() o WinMain().
-        /// </summary>
         public App()
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
         }
 
-        /// <summary>
-        /// Richiamato quando l'applicazione viene avviata normalmente dall'utente.  All'avvio dell'applicazione
-        /// verranno utilizzati altri punti di ingresso per aprire un file specifico, per visualizzare
-        /// risultati di ricerche e così via.
-        /// </summary>
-        /// <param name="e">Dettagli sulla richiesta e il processo di avvio.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
@@ -52,30 +42,43 @@ namespace WindowApplication
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            FrameContainer appContainer = Window.Current.Content as FrameContainer;
+            Frame rootFrame = null;
 
-            // Non ripetere l'inizializzazione dell'applicazione se la finestra già dispone di contenuto,
-            // assicurarsi solo che la finestra sia attiva
-            if (rootFrame == null)
+            if (appContainer != null)
             {
-                // Creare un frame che agisca da contesto di navigazione e passare alla prima pagina
-                rootFrame = new Frame();
+                AppContainer = appContainer;
+                rootFrame = appContainer.Content as Frame;
+                RootFrame = rootFrame;
+            }
 
-                // TODO: modificare questo valore su una dimensione di cache appropriata per l'applicazione
+
+            // Initialize application if not initialized
+            if (appContainer == null)
+            {
+                // Create application container and a root frame
+                // Set up a new Frame to be placed inside container
+                appContainer = new FrameContainer();
+                rootFrame = new Frame() { Background = null };
+                RootFrame = rootFrame;
+                appContainer.Content = rootFrame;
+                AppContainer = appContainer;
+
+                // TODO: customize this value to obtain the best caching value for your app
                 rootFrame.CacheSize = 1;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    // TODO: Caricare lo stato dall'applicazione sospesa in precedenza
+                    // TODO: Load previous application state
                 }
 
-                // Posizionare il frame nella finestra corrente
-                Window.Current.Content = rootFrame;
+                // Set application container as current frame
+                Window.Current.Content = appContainer;
             }
 
             if (rootFrame.Content == null)
             {
-                // Rimuove l'avvio della navigazione turnstile.
+                // Remove first animation
                 if (rootFrame.ContentTransitions != null)
                 {
                     this.transitions = new TransitionCollection();
@@ -88,43 +91,33 @@ namespace WindowApplication
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
-                // Quando lo stack di navigazione non viene ripristinato, esegui la navigazione alla prima pagina,
-                // configurando la nuova pagina per passare le informazioni richieste come parametro di
-                // navigazione
+                // Navigate to first page, when stack is not recovered
                 if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }
             }
 
-            // Assicurarsi che la finestra corrente sia attiva
+            //Workaround for global font setting
+            RootFrame.FontFamily = new FontFamily("Segoe WP");
+
+            // Activate current Window
             Window.Current.Activate();
         }
 
-        /// <summary>
-        /// Ripristina le transizioni del contenuto dopo l'avvio dell'applicazione.
-        /// </summary>
-        /// <param name="sender">Oggetto a cui è associato il gestore.</param>
-        /// <param name="e">Dettagli sull'evento di navigazione.</param>
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;
             rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
+            
         }
 
-        /// <summary>
-        /// Richiamato quando l'esecuzione dell'applicazione viene sospesa.  Lo stato dell'applicazione viene salvato
-        /// senza che sia noto se l'applicazione verrà terminata o ripresa con il contenuto
-        /// della memoria ancora integro.
-        /// </summary>
-        /// <param name="sender">Origine della richiesta di sospensione.</param>
-        /// <param name="e">Dettagli relativi alla richiesta di sospensione.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
-            // TODO: Salvare lo stato dell'applicazione e interrompere qualsiasi attività in background
+            // TODO: Save application state
             deferral.Complete();
         }
     }

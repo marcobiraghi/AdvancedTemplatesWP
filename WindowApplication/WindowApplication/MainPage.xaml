@@ -1,14 +1,77 @@
-﻿<Page
+﻿<controls:ViewPage
     x:Class="WindowApplication.MainPage"
+    xmlns:controls="using:WindowApplication.Controls"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WindowApplication"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    mc:Ignorable="d">
+    
+    <controls:ViewPage.MenuContent>
+        <Border Background="#FF444444">
+            <StackPanel Margin="20,75,20,15">
+                <TextBlock Text="Sample menu" Foreground="White" FontSize="20" Margin="0,5" />
+                <TextBlock Text="You can put free content" Foreground="White" FontSize="20" Margin="0,5"  />
+                <TextBlock Text="and also remove this panels" Foreground="White" FontSize="20" Margin="0,5"  />
+            </StackPanel>
+        </Border>
+    </controls:ViewPage.MenuContent>
+    <controls:ViewPage.TopBarContent>
+        <Border>
+            <TextBlock Text="HEY, I'm the top bar" 
+                       FontSize="22" 
+                       Foreground="White" 
+                       VerticalAlignment="Center" />
+        </Border>
+    </controls:ViewPage.TopBarContent>
+    
     <Grid>
-
+        <ScrollViewer HorizontalAlignment="Center" 
+                      VerticalAlignment="Center"
+                      Margin="20,0">
+            <StackPanel>
+                <RichTextBlock HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           Foreground="Black"
+                           TextWrapping="Wrap"
+                           FontSize="20" 
+                           TextAlignment="Center">
+                    <RichTextBlock.Blocks>
+                        <Paragraph>
+                            <Run Foreground="Black">
+                                Hi, and welcome to this application template with an amazing
+                            GLOBAL menu and top bar. I'm the page, use me normally.
+                            </Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Foreground="Red" FontSize="24">
+                                TRY SWIPE RIGHT FROM LEFT PAGE BORDER :)
+                            </Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run>
+                                You can put menu in MenuContent object and top bar in TopBarContent
+                            </Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run>
+                                For more informations read documentation.
+                            </Run>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run>
+                                tap above to try navigate betwen pages
+                            </Run>
+                        </Paragraph>
+                    </RichTextBlock.Blocks>
+                </RichTextBlock>
+                <Button Click="Button_Click" 
+                    Content="Let's navigate!" 
+                    RequestedTheme="Light" 
+                    HorizontalAlignment="Center"
+                    Margin="10"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
-</Page>
+</controls:ViewPage>
